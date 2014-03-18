@@ -20,13 +20,13 @@ public class Generator {
 		StringBuilder sb = new StringBuilder();
 		
 		for (int i = 0; i < length; i++){
-			sb.append(getSNP(gen.nextInt( 4 )));
+			sb.append(getNeuclotide(gen.nextInt( 4 )));
 		}
 		
 		return sb.toString();
 	}
 	
-	private char getSNP(int id){
+	private char getNeuclotide(int id){
 		switch(id){
 		case 0:
 			return 'A';

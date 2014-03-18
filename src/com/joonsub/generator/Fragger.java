@@ -7,18 +7,21 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
-import java.util.Set;
 
 public class Fragger {
-
+	final static Charset ENCODING = StandardCharsets.UTF_8;
+	final static String OUTPUT_FILE_NAME = ".\\resources\\";
+	
 	private static Random rg = new Random(System.currentTimeMillis());
-	static Set<String> fragments = new HashSet<String>();
+	static List<String> fragments = new ArrayList<String>();
+	
 	public static Generator gen;
-	public static int frag_length = 30;
-	public static int reads = 15000;
-	public static int seq_length = 500;
+	public static int frag_length = 5;
+	public static int reads = 50;
+	public static int seq_length = 20;
 	
 	public static void main(String[] args) throws IOException{
 		gen = new Generator(seq_length);
@@ -35,10 +38,7 @@ public class Fragger {
 		System.out.println("done");
 	}
 	
-	final static Charset ENCODING = StandardCharsets.UTF_8;
-	final static String OUTPUT_FILE_NAME = ".\\resources\\";
-	
-	public static void writeLargerTextFile(String aFileName, Set<String> aLines) throws IOException {
+	public static void writeLargerTextFile(String aFileName, List<String> aLines) throws IOException {
 		Path path = Paths.get(aFileName);
 		try (BufferedWriter writer = Files.newBufferedWriter(path, ENCODING)) {
 			for (String line : aLines) {

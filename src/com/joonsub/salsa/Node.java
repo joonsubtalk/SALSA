@@ -1,9 +1,17 @@
 package com.joonsub.salsa;
 
+import java.util.List;
+
 public class Node {
 	private char value;
-	private Node aNode;
-	private Node cNode;
-	private Node tNode;
-	private Node gNode;
+	private List<Node> nextNode;
+	
+	public Node(){
+		this.value = ' ';
+	}
+	public Node(char value){
+		this.value = value;
+	}
+	
+		
 }
