@@ -20,8 +20,8 @@ public class Fragger {
 	
 	public static Generator gen;
 	public static int frag_length = 5;
-	public static int reads = 50;
-	public static int seq_length = 20;
+	public static int reads = 100;
+	public static int seq_length = 10;
 	
 	public static void main(String[] args) throws IOException{
 		gen = new Generator(seq_length);
@@ -29,10 +29,10 @@ public class Fragger {
 		int randIndex;
 		
 		for (int i = 0; i < reads; i++) {
-			randIndex = rg.nextInt(seq_length - frag_length);
+			randIndex = rg.nextInt(seq_length - frag_length + 1);
 			fragments.add(gen.getSequence().substring(randIndex,randIndex+frag_length));
 		}
-		
+		System.out.println("Sliced " + reads + " reads");
 		writeLargerTextFile(OUTPUT_FILE_NAME + "output.txt", fragments);
 		writeSeq(OUTPUT_FILE_NAME  + "seq.txt", gen.getSequence());
 		System.out.println("done");

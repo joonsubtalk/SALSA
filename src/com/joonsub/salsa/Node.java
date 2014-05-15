@@ -1,29 +1,14 @@
 package com.joonsub.salsa;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Node {
+
+	char value;
+	List next = new ArrayList<Node>();
 	
-	// make child node
-	private Node[] c;
-	public Node(){
-		c = new Node[4];
+	Node(char c){
+		this.value = c;
 	}
-	
-	public void insert(String s){
-		
-	}
-	
-	private char value;
-	private List<Node> nextNode;
-	/*
-	public Node(){
-		this.value = ' ';
-	}
-	*/
-	public Node(char value){
-		this.value = value;
-	}
-	
-		
 }
