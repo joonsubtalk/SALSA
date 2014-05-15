@@ -37,7 +37,20 @@ public class TrieImpl<T> implements Trie<T>{
         }
     }
     
-    
+    private void getValuesFromNode(TrieNode<T> currNode, List<T> valueList) {
+        if (currNode.isTerminal()) {
+            valueList.add(currNode.getNodeValue());
+        }
+         
+        Map<Character, TrieNode<T>> children = currNode.getChildren();
+        Iterator childIter = children.keySet().iterator();
+        while (childIter.hasNext()) {
+            Character ch = (Character)childIter.next();
+            TrieNode<T> nextNode = children.get(ch);
+            getValuesFromNode(nextNode, valueList);
+        }
+    }
+     
     private void getKeysFromNode(TrieNode<T> currNode, String key, Set keySet) {
         if (currNode.isTerminal()) {
             keySet.add(key);
@@ -50,21 +63,6 @@ public class TrieImpl<T> implements Trie<T>{
             TrieNode<T> nextNode = children.get(ch);
             String s = key + nextNode.getNodeKey();
             getKeysFromNode(nextNode, s, keySet);
-        }
-    }
-    
-    private void getValuesFromNode(TrieNode<T> currNode, List<T> valueList) {
-        if (currNode.isTerminal()) {
-            valueList.add(currNode.getNodeValue());
-        }
-        Map<Character, TrieNode<T>> children = currNode.getChildren();
-        Iterator childIter = children.keySet().iterator();
-        while (childIter.hasNext()) {
-
-            Character ch = (Character)childIter.next();
-            TrieNode<T> nextNode = children.get(ch);
-            //System.out.print(nextNode.getNodeKey()+":"+nextNode.hit+",");
-            getValuesFromNode(nextNode, valueList);
         }
     }
     

@@ -25,22 +25,31 @@ public class SALSA {
 			
 			// Put everything into a list.
 			List<String> contigList = (contigs.getKeyList());
+			System.out.println(contigList.get(0));
+			System.out.print(" "+contigList.get(0).substring(1,contigList.get(1).length()));
+			System.out.println("\n\r");
 			
 			// Go thru every element
+			int start = 1;
+			StringBuilder sb = new StringBuilder();
+			String contig;
 			for (int i = 0; i < contigList.size(); i++ ){
-				System.out.println("searching: " + contigList.get(i).substring(1,contigList.size()-1));
-				System.out.print("\t: " + contigList.get(i));
-				System.out.println("\t: " + contigList.get(i).substring(1,contigList.size()-1));
-				System.out.println("\t: " + contigs.search(contigList.get(i).substring(1,contigList.size()-1)));
-				//contigs.search(contigList.get(i).substring(1,contigList.size()-1));
+				start = 1;
+				sb.append(contigList.get(i).substring(start,contigList.get(1).length()));
+				contig = sb.toString();
+				sb.setLength(0);
+				System.out.println("searching: " + contigList.get(i));
+				System.out.println("\t:   " + contig);
+				System.out.println("\tFound: " + contigs.search(contig));
+				//contigs.search(contigList.get(i).substring(start,contigList.get(0).length()-1));
 			}
 			
-//			Iterator itr = contigList.iterator();
-//			while(itr.hasNext()) {
-//				Object element = itr.next();
-//				System.out.print(element + " ");
-//			}
-//			System.out.println(contigs.size());
+			Iterator itr = contigList.iterator();
+			while(itr.hasNext()) {
+				Object element = itr.next();
+				System.out.print(element + " ");
+			}
+			System.out.println(contigs.size());
 		}
 		
 		public static void readLargerTextFile(String aFileName) throws IOException {
