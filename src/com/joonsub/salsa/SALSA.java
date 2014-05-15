@@ -22,24 +22,25 @@ public class SALSA {
 			readLargerTextFile(FILE_NAME + "output.txt");
 			
 			//contigs.getAllKeys();
-			//System.out.println(contigs.search("A"));
 			
 			// Put everything into a list.
 			List<String> contigList = (contigs.getKeyList());
 			
 			// Go thru every element
-//			for (int i = 0; i < contigList.size(); i++ ){
-//				System.out.println("searching: " + contigList.get(i).substring(1,contigList.size()-1));
-//				System.out.println("\t: " + contigList.get(i));
-//				contigs.search(contigList.get(i).substring(1,contigList.size()-1));
-//			}
-			
-			Iterator itr = contigList.iterator();
-			while(itr.hasNext()) {
-				Object element = itr.next();
-				System.out.print(element + " ");
+			for (int i = 0; i < contigList.size(); i++ ){
+				System.out.println("searching: " + contigList.get(i).substring(1,contigList.size()-1));
+				System.out.print("\t: " + contigList.get(i));
+				System.out.println("\t: " + contigList.get(i).substring(1,contigList.size()-1));
+				System.out.println("\t: " + contigs.search(contigList.get(i).substring(1,contigList.size()-1)));
+				//contigs.search(contigList.get(i).substring(1,contigList.size()-1));
 			}
-			System.out.println(contigs.size());
+			
+//			Iterator itr = contigList.iterator();
+//			while(itr.hasNext()) {
+//				Object element = itr.next();
+//				System.out.print(element + " ");
+//			}
+//			System.out.println(contigs.size());
 		}
 		
 		public static void readLargerTextFile(String aFileName) throws IOException {

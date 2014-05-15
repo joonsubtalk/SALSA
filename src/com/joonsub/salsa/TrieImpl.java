@@ -57,10 +57,10 @@ public class TrieImpl<T> implements Trie<T>{
         if (currNode.isTerminal()) {
             valueList.add(currNode.getNodeValue());
         }
-         
         Map<Character, TrieNode<T>> children = currNode.getChildren();
         Iterator childIter = children.keySet().iterator();
         while (childIter.hasNext()) {
+
             Character ch = (Character)childIter.next();
             TrieNode<T> nextNode = children.get(ch);
             //System.out.print(nextNode.getNodeKey()+":"+nextNode.hit+",");
@@ -112,15 +112,12 @@ public class TrieImpl<T> implements Trie<T>{
 
 	@Override
 	public List<T> search(String prefix) {
-		// TODO Auto-generated method stub
         List<T> list = new ArrayList<T>();
          
         char[] ch = prefix.toCharArray();
         TrieNode<T> node = rootNode;
         for (int i = 0; i < ch.length; i++) {
-            node = node.getChildren().get(ch[i]);        
-            getValuesFromNode(node, list);
-            
+            node = node.getChildren().get(ch[i]);
             if (node == null) {
                 break;
             }
@@ -131,7 +128,7 @@ public class TrieImpl<T> implements Trie<T>{
         }
          
         return list;
-	}
+    }
 
 	@Override
 	public boolean contains(String key) {
