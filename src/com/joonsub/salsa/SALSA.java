@@ -23,27 +23,37 @@ public class SALSA {
 			
 			//contigs.getAllKeys();
 			
-			// Put everything into a list.
+			// Put everything into a list -> contigList.
 			List<String> contigList = (contigs.getKeyList());
-			System.out.println(contigList.get(0));
-			System.out.print(" "+contigList.get(0).substring(1,contigList.get(1).length()));
+			
 			System.out.println("\n\r");
 			
 			// Go thru every element
 			int start = 1;
 			StringBuilder sb = new StringBuilder();
+			StringBuilder reconstruct = new StringBuilder();
 			String contig;
 			for (int i = 0; i < contigList.size(); i++ ){
 				start = 1;
+				// Get's the substring of the contig
 				sb.append(contigList.get(i).substring(start,contigList.get(1).length()));
 				contig = sb.toString();
-				sb.setLength(0);
+				sb.setLength(0); // clears string
+				
 				System.out.println("searching: " + contigList.get(i));
 				System.out.println("\t:   " + contig);
+				// looks for the substring
 				System.out.println("\tFound: " + contigs.search(contig));
-				//contigs.search(contigList.get(i).substring(start,contigList.get(0).length()-1));
+				if (contigs.search(contig).isEmpty()){
+					System.out.println("END OF FILE");
+				}else{
+					contigList.remove(i);
+					// thought: Ok, so I remove the contig from the list, now how do I keep it going and not make it go into a loop?
+					// keep it comin
+				}
 			}
 			
+			// List Every contigs
 			Iterator itr = contigList.iterator();
 			while(itr.hasNext()) {
 				Object element = itr.next();
