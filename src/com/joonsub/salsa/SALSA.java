@@ -5,6 +5,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
@@ -15,7 +16,10 @@ public class SALSA {
 		final static String FILE_NAME = ".\\resources\\";
 		final static Charset ENCODING = StandardCharsets.UTF_8;
 	    static Trie<String> contigs = new TrieImpl<String>();
+	    static StringBuilder strands = new StringBuilder();
 		
+	    static char neuclotide;
+	    
 		public static void main(String[] args) throws IOException{
 			//root = new Node();
 			//			root = new TreeNode<Character>('r');
@@ -29,35 +33,39 @@ public class SALSA {
 			System.out.println("\n\r");
 			
 			// Go thru every element
-			int start = 1;
-			StringBuilder sb = new StringBuilder();
-			StringBuilder reconstruct = new StringBuilder();
-			String contig;
-			for (int i = 0; i < contigList.size(); i++ ){
-				start = 1;
-				// Get's the substring of the contig
-				sb.append(contigList.get(i).substring(start,contigList.get(1).length()));
-				contig = sb.toString();
-				sb.setLength(0); // clears string
-				
-				System.out.println("searching: " + contigList.get(i));
-				System.out.println("\t:   " + contig);
-				// looks for the substring
-				System.out.println("\tFound: " + contigs.search(contig));
-				if (contigs.search(contig).isEmpty()){
-					System.out.println("END OF FILE");
-				}else{
-					contigList.remove(i);
-					// thought: Ok, so I remove the contig from the list, now how do I keep it going and not make it go into a loop?
-					// keep it comin
-				}
+			StringBuilder reconstruct = new StringBuilder();	//actual string we want built
+
+			List<String> strandList = new ArrayList<String>();
+			for (int i = 0; i < contigList.size(); i++){
+				//add first
+				reconstruct.append(contigList.get(i));
+				//Reach till end
+				getNextContig(contigList.get(i));
+
+				System.out.println("fin " + i + "/"+contigList.size());
+				//add it to the db
+				strandList.add(reconstruct.toString() + strands.toString());
+				System.out.println(reconstruct.toString() + strands.toString());
+				//reset
+				reconstruct.setLength(0);
+				strands.setLength(0);
 			}
 			
+			
+			
+			//add first
+//			reconstruct.append(contigList.get(0));
+//			
+//			//Reach till end
+//			getNextContig(contigList.get(0));
+//			
+			
 			// List Every contigs
-			Iterator itr = contigList.iterator();
+			Iterator itr = strandList.iterator();
 			while(itr.hasNext()) {
 				Object element = itr.next();
 				System.out.print(element + " ");
+				
 			}
 			System.out.println(contigs.size());
 		}
@@ -76,6 +84,32 @@ public class SALSA {
 				}
 			}
 			System.out.println("Files Loaded");
+		}
+		
+		public static String getNextContig(String query){
+
+//			System.out.println("0: " + query);
+			// substring one less :: QUERY
+			String contigToBeSearched = query.substring(1, query.length());
+//			System.out.println("1: " + contigToBeSearched);
+			// look for the contig :: search(-UERY)
+			String foundContig = contigs.search(contigToBeSearched).toString();
+//			System.out.println("2: " + foundContig);
+			// get last alphabet
+			
+			if (foundContig.toString().length() > 3){
+				neuclotide = foundContig.substring(foundContig.length()-2,foundContig.length()-1).charAt(0);
+//				System.out.println("3: " + neuclotide);
+				strands.append(neuclotide);
+
+				
+				// format found :: [QUERY]
+				foundContig = foundContig.substring(1,foundContig.length()-1);
+//				System.out.println("4: " + foundContig);
+				
+				return getNextContig(foundContig);
+			}
+			return null;
 		}
 		
 }
