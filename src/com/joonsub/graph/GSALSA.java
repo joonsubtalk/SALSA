@@ -32,15 +32,25 @@ public class GSALSA {
 		
 		//contigs.getAllKeys();
 		
+		// Create a List of Edges
+		List<GEdge> edgeList = new ArrayList<GEdge>();
+		
 		// Put everything into a list -> contigList.
 		List<String> contigList = (contigs.getKeyList());
-		GEdge ge;
+		GEdge edges;
 		for (int i = 0; i < contigList.size(); i++){
 			System.out.println(contigList.get(i).toString());
 			for (int j = 0; j < contigList.size(); j++){
-				if (i != j)
-					ge = new GEdge(contigList.get(i),contigList.get(j));
+				if (i != j){
+					edges = new GEdge(contigList.get(i),contigList.get(j));
+					edgeList.add(edges);
+				}
 			}
+		}
+		for (int i = 0; i < edgeList.size(); i++){
+			System.out.print(edgeList.get(i).getNode1() + " ");
+			System.out.print(edgeList.get(i).getNode2() + ": ");
+			System.out.println(edgeList.get(i).getWeight());
 		}
 		//System.out.println(ge.getWeight());
 	}
