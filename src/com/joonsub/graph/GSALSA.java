@@ -34,12 +34,15 @@ public class GSALSA {
 		
 		// Put everything into a list -> contigList.
 		List<String> contigList = (contigs.getKeyList());
-		
+		GEdge ge;
 		for (int i = 0; i < contigList.size(); i++){
 			System.out.println(contigList.get(i).toString());
+			for (int j = 0; j < contigList.size(); j++){
+				if (i != j)
+					ge = new GEdge(contigList.get(i),contigList.get(j));
+			}
 		}
-		GEdge ge = new GEdge("AAAAATAA","TAAAATAA");
-		System.out.println(ge.getWeight());
+		//System.out.println(ge.getWeight());
 	}
 	
 	public static void readLargerTextFile(String aFileName) throws IOException {
