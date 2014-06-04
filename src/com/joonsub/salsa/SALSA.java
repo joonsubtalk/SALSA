@@ -17,8 +17,10 @@ public class SALSA {
 		final static Charset ENCODING = StandardCharsets.UTF_8;
 	    static Trie<String> contigs = new TrieImpl<String>();
 	    static StringBuilder strands = new StringBuilder();
-		
+		static List<String> usedStrands = new ArrayList<String>();
 	    static char neuclotide;
+	    
+	    static Boolean test = false;
 	    
 		public static void main(String[] args) throws IOException{
 			//root = new Node();
@@ -34,7 +36,10 @@ public class SALSA {
 			
 			// Go thru every element
 			StringBuilder reconstruct = new StringBuilder();	//actual string we want built
-
+			
+			// max strand
+			int maxChar = 0;
+			int maxID = -1;
 			List<String> strandList = new ArrayList<String>();
 			for (int i = 0; i < contigList.size(); i++){
 				//add first
@@ -45,6 +50,12 @@ public class SALSA {
 				System.out.println("fin " + i + "/"+contigList.size());
 				//add it to the db
 				strandList.add(reconstruct.toString() + strands.toString());
+				
+				if (maxChar < reconstruct.length() + strands.length()){
+					maxChar = reconstruct.length() + strands.length();
+					maxID = i;
+				}
+				
 				System.out.println(reconstruct.toString() + strands.toString());
 				//reset
 				reconstruct.setLength(0);
@@ -61,13 +72,18 @@ public class SALSA {
 //			
 			
 			// List Every contigs
-			Iterator itr = strandList.iterator();
-			while(itr.hasNext()) {
-				Object element = itr.next();
-				System.out.print(element + " ");
-				
+			if (test){
+				Iterator itr = strandList.iterator();
+				while(itr.hasNext()) {
+					Object element = itr.next();
+					System.out.print(element + " ");
+				}
 			}
-			System.out.println(contigs.size());
+			System.out.println("this: " + usedStrands.toString());
+			System.out.println(contigs.size() + " The total size");
+			System.out.println(maxID);
+			System.out.println(strandList.get(maxID));
+			System.out.println(maxChar);
 		}
 		
 		public static void readLargerTextFile(String aFileName) throws IOException {
@@ -87,21 +103,24 @@ public class SALSA {
 		}
 		
 		public static String getNextContig(String query){
-
-//			System.out.println("0: " + query);
+			if (test)
+				System.out.println("0: " + query);
 			// substring one less :: QUERY
 			String contigToBeSearched = query.substring(1, query.length());
-//			System.out.println("1: " + contigToBeSearched);
+			if (test)
+				System.out.println("1: " + contigToBeSearched);
 			// look for the contig :: search(-UERY)
 			String foundContig = contigs.search(contigToBeSearched).toString();
-//			System.out.println("2: " + foundContig);
+			if (test)
+				System.out.println("2: " + foundContig);
 			// get last alphabet
 			
-			if (foundContig.toString().length() > 3){
+			if (!foundContig.equals("[]")){
 				neuclotide = foundContig.substring(foundContig.length()-2,foundContig.length()-1).charAt(0);
 //				System.out.println("3: " + neuclotide);
 				strands.append(neuclotide);
-
+				
+				usedStrands.add(foundContig); // add it to the list of goodies
 				
 				// format found :: [QUERY]
 				foundContig = foundContig.substring(1,foundContig.length()-1);
@@ -109,7 +128,9 @@ public class SALSA {
 				
 				return getNextContig(foundContig);
 			}
-			return null;
+			//else if (query.length() > )
+			else
+				return null;
 		}
 		
 }

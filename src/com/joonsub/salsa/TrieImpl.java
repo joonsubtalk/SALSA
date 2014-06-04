@@ -14,7 +14,6 @@ public class TrieImpl<T> implements Trie<T>{
     private void addNode(TrieNode<T> currNode, String key, int pos, T value) {
         Character c = key.charAt(pos);
         TrieNode<T> nextNode = currNode.getChildren().get(c);
-        currNode.hit++;
          
         if (nextNode == null) {
             nextNode = new TrieNode<T>();
@@ -124,10 +123,10 @@ public class TrieImpl<T> implements Trie<T>{
         if (node != null) {
             getValuesFromNode(node, list);
         }
-         
+        
         return list;
     }
-
+	
 	@Override
 	public boolean contains(String key) {
 		// TODO Auto-generated method stub

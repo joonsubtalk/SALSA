@@ -7,7 +7,7 @@ public class TrieNode<T> {
 	private Character nodeKey;
 	private T nodeValue;
 	private boolean terminal;
-	public int hit;
+	public boolean hit = false;
 	private Map<Character, TrieNode<T>> children = new HashMap<Character, TrieNode<T>>();
 	
 	public Character getNodeKey() {

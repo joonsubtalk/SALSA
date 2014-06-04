@@ -20,8 +20,8 @@ public class Fragger {
 	
 	public static Generator gen;
 	public static int frag_length = 15;
-	public static int reads = 20000;
-	public static int seq_length = 100;
+	public static int reads = 1000;
+	public static int seq_length = 50;
 	
 	public static void main(String[] args) throws IOException{
 		gen = new Generator(seq_length);
