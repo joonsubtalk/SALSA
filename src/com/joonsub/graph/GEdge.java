@@ -30,6 +30,10 @@ public class GEdge {
 	public int getWeight(){
 		return this.weight;
 	}
+	
+	public String toString(){
+		return getNode1() + " --> " + getNode2() + ": " + getWeight();
+	}
 
 	//n1: ACTGA
 	//n2: TGAGG
