@@ -56,7 +56,7 @@ public class SALSA {
 					maxID = i;
 				}
 				
-				System.out.println(reconstruct.toString() + strands.toString());
+//				System.out.println(reconstruct.toString() + strands.toString());
 				//reset
 				reconstruct.setLength(0);
 				strands.setLength(0);
@@ -79,7 +79,7 @@ public class SALSA {
 					System.out.print(element + " ");
 				}
 			}
-			System.out.println("this: " + usedStrands.toString());
+//			System.out.println("this: " + usedStrands.toString());
 			System.out.println(contigs.size() + " The total size");
 			System.out.println(maxID);
 			System.out.println(strandList.get(maxID));
