@@ -1,8 +1,10 @@
 package com.joonsub.graph;
 
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -26,8 +28,7 @@ public class GSALSA {
     static Boolean test = false;
     
 	public static void main(String[] args) throws IOException{
-		//root = new Node();
-		//			root = new TreeNode<Character>('r');
+		// Read in the Files that have been output.
 		readLargerTextFile(FILE_NAME + "output.txt");
 		
 		//contigs.getAllKeys();
@@ -137,9 +138,19 @@ public class GSALSA {
 			maxEdgeList.remove(locEdge);
 		}
 
-		System.out.println("fin:");
-		System.out.println(reverseString(sb.toString()));
-		
+		System.out.println("writing...");
+		//System.out.println(reverseString(sb.toString()));
+
+		writeLargerTextFile(FILE_NAME + "re.txt", reverseString(sb.toString()));
+		System.out.println("done");
+	}
+	
+	public static void writeLargerTextFile(String aFileName, String aLines) throws IOException {
+		Path path = Paths.get(aFileName);
+		try (BufferedWriter writer = Files.newBufferedWriter(path, ENCODING)) {
+				writer.write(aLines);
+				writer.newLine();
+		}
 	}
 	
 	public static String reverseString(String s){
