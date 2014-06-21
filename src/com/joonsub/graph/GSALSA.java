@@ -71,8 +71,7 @@ public class GSALSA {
 			location = 1;
 			
 		}
-		System.out.println(" ss  ");
-		System.out.println(" ss  ");
+		/*
 		for (int i = 0; i < maxEdgeList.size(); i++){
 			System.out.println(maxEdgeList.get(i).toString());
 		}
@@ -81,6 +80,7 @@ public class GSALSA {
 		for (int i = 0; i < edgeList.size(); i++){
 			System.out.println(edgeList.get(i).toString());
 		}
+		*/
 		
 		StringBuilder sb = new StringBuilder();
 

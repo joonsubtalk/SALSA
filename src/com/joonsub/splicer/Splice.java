@@ -24,7 +24,7 @@ public class Splice {
 //	public static int seq_length = 50;
 	
 	public static int frag_length = 75;
-	public static int reads = 3000;
+	public static int reads = 3500;
 	public String sequence;
 	final static String FILE_NAME = ".\\resources\\";
 	
